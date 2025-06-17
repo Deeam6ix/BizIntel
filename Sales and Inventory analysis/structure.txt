@@ -1,0 +1,12 @@
+Structure:
+    start
+        print welcome message
+        Invetory dashboard
+        choose from the menu below
+        1. KPI Tracking
+        2. Inventory analysis
+        3. Sale trend visualizations
+        4. Exit
+        if choice == "1": THEN
+            welcome message 
+            KPI tracking system.

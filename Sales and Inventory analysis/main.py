@@ -3,7 +3,7 @@ def main():
     inventory_dashboard()
 
 def welcome_message():
-    print(f{}"""
+    box = """
 ╔══════════════════════════════════════════════╗
 ║                                              ║
 ║           Welcome to BizIntel Pro!           ║
@@ -17,10 +17,15 @@ def welcome_message():
 ║       in business innovation and success.    ║
 ║                                              ║
 ╚══════════════════════════════════════════════╝
-""")
+"""
+
+    # Width of your desired print area (e.g., 100 characters)
+    for line in box.splitlines():
+        print(f"{line:^100}")
+
     
 def inventory_dashboard():
-    inventory_dashboard_choice=input("""
+    menu = """
 ╔════════════════════════════════════════════════════╗
 ║                                                    ║
 ║             📦 INVENTORY DASHBOARD MENU            ║
@@ -41,7 +46,18 @@ def inventory_dashboard():
 ║    12. Product Heatmap                             ║
 ║                                                    ║
 ╚════════════════════════════════════════════════════╝
-Please select a option: """)
+"""
+
+    # Desired total width
+    width = 100
+
+    # Print centered menu and capture user choice
+    for line in menu.strip().splitlines():
+        print(f"{line:^{width}}")
+
+    inventory_dashboard_choice = input(f"\n{'Please select an option: '
+    :^{width}}")
+
     while True:
         if inventory_dashboard_choice == "1":
             inventory_choice_one()

@@ -3,7 +3,7 @@ def main():
     inventory_dashboard()
 
 def welcome_message():
-    print("""
+    print(f{}"""
 ╔══════════════════════════════════════════════╗
 ║                                              ║
 ║           Welcome to BizIntel Pro!           ║
@@ -11,7 +11,7 @@ def welcome_message():
 ║  Empowering Smart Business Decisions with    ║
 ║      Data-Driven Intelligence and Insight    ║
 ║                                              ║
-║      💼 Optimize. 📊 Analyze. 🚀 Grow.       ║
+║      💼 Optimize. 📊 Analyze. 🚀 Grow.      ║
 ║                                              ║
 ║   Thank you for choosing us as your partner  ║
 ║       in business innovation and success.    ║
@@ -27,21 +27,21 @@ def inventory_dashboard():
 ║                                                    ║
 ║         Choose from the options below:             ║
 ║                                                    ║
-║     1. 📈 KPI Tracking                              ║
-║     2. 📊 Inventory Analysis                        ║
-║     3. 📉 Sale Trend Visualizations                 ║
-║     4. ❌ Exit                                       ║
+║     1. 📈 KPI Tracking                             ║
+║     2. 📊 Inventory Analysis                       ║
+║     3. 📉 Sale Trend Visualizations                ║
+║     4. ❌ Exit                                     ║
 ║                                                    ║
-║     [Coming Soon]                                   ║
-║     7. Forecasting                                  ║
-║     8. Stock Replenishment Automation               ║
-║     9. Low Stock Alerts                             ║
-║    10. Supplier Performance                         ║
-║    11. Inventory Turnover Ratio                     ║
-║    12. Product Heatmap                              ║
+║     [Coming Soon]                                  ║
+║     7. Forecasting                                 ║
+║     8. Stock Replenishment Automation              ║
+║     9. Low Stock Alerts                            ║
+║    10. Supplier Performance                        ║
+║    11. Inventory Turnover Ratio                    ║
+║    12. Product Heatmap                             ║
 ║                                                    ║
 ╚════════════════════════════════════════════════════╝
-""")
+Please select a option: """)
     while True:
         if inventory_dashboard_choice == "1":
             inventory_choice_one()

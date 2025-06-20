@@ -41,7 +41,28 @@ def user_choice_two():
         name = input("Please insert your name: ")
         surname = input("Please insert your surname: ")
         user_name = input("Please insert your username: ")
-        password = input("Please insert your password: ")
+
+        while True:
+            password = input("Please insert your password: ")
+
+            # Validate all conditions in a single if statement using re.search()
+            if (
+                len(password) >= 8 and                                   # ✅ Minimum 8 characters
+                re.search(r"[a-z]", password) and                        # ✅ At least one lowercase letter
+                re.search(r"[A-Z]", password) and                        # ✅ At least one uppercase letter
+                re.search(r"[0-9]", password) and                        # ✅ At least one digit
+                re.search(r"[!@#$%^&*(),.?\":{}|<>_\-\[\]\\\/;'+=~`]", password)  # ✅ At least one special character
+            ):
+                print("✅ Password is valid and secure.")
+                break  # Exit the loop once a valid password is entered
+
+            else:
+                # If any condition fails, print general message (can customize per case if needed)
+                print("❌ Password must be at least 8 characters long, and include:\n"
+                      "- at least one uppercase letter\n"
+                      "- at least one lowercase letter\n"
+                      "- at least one number\n"
+                      "- at least one special character (e.g. @, #, $, %)")
 
         # Send all data to the saving function
         user_info_file(name, surname, user_name, password)

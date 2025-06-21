@@ -12,6 +12,19 @@ def inventory_choice_one(): #KPI tracking
     sales_growth()
     quota_attainment()
     sales_region()
+
+def inventory_choice_two():
+    ...
+def inventory_choice_three():
+    ...
+def total_sales_revenue():
+    ...
+def sales_growth():
+    ...
+def quota_attainment():
+    ...
+def sales_region():
+    ...
     
 def record_sale():
     try:
@@ -31,7 +44,7 @@ def record_sale():
                 print("Invalid postal code, please try again")
         #Product or service will be assigned price and barcode number
         while True:
-            product_or_service_sold=input("\n\nProduct or Service Sold Code: ")
+            products_and_services.search_product_or_service()
     except:
         ...
         

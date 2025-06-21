@@ -19,7 +19,9 @@ def user_info():
 
         # Placeholder for sign-in (not yet implemented)
         if user_choice == "1":
-            user_choice_one()
+            if not user_choice_one():  # Call the new function and check result
+                print("Redirecting to account creation...")
+                user_choice_two()
 
         # If user chooses to create an account
         elif user_choice == "2":
@@ -35,11 +37,30 @@ def user_info():
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
 
-def user_choice_one():
-    sales.welcome_message
-    user_name=input("\n\nPlease insert your username: ")
-    password=input("Please insert your password: ")
 
+# This function allows the user to log in by checking their credentials
+# against the existing JSON and CSV databases.
+def user_choice_one():
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+
+    # ----------- Check JSON file first -----------
+    json_file = "users_login.json"
+    if os.path.exists(json_file):
+        with open(json_file, "r") as file:
+            try:
+                users = json.load(file)  # Load all users from JSON
+                for user in users:
+                    # If both username and password match, grant access
+                    if user["username"] == username and user["password"] == password:
+                        print(f"✅ Welcome back, {user['name']} {user['surname']}!")
+                        return True
+            except json.JSONDecodeError:
+                pass  # If JSON is empty or corrupt, skip to next check
+
+    # If no match found in either file
+    print("❌ No matching user found. Please create an account.")
+    return False
     
 # Function to collect user information for account creation
 def user_choice_two():

@@ -34,6 +34,9 @@ def user_info():
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
 
+def user_choice_one():
+    ...
+    
 # Function to collect user information for account creation
 def user_choice_two():
     try:
@@ -57,7 +60,7 @@ def user_choice_two():
                 break  # Exit the loop once a valid password is entered
 
             else:
-                # If any condition fails, print general message (can customize per case if needed)
+                # If any condition fails, print general message 
                 print("❌ Password must be at least 8 characters long, and include:\n"
                       "- at least one uppercase letter\n"
                       "- at least one lowercase letter\n"

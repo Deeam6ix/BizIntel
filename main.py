@@ -3,9 +3,8 @@ import authentication
 
 def main():
     login()
-    sales.welcome_message()
-    sales.inventory_dashboard()
-
+    sales()
+    
 def login():
     account=input("Do you already have an account with us?\n"
     "1.Yes\n"
@@ -18,5 +17,9 @@ def login():
         print("\n\nPlease go ahead and login now.")
         authentication.user_choice_one()
 
+def sales():
+    sales.welcome_message()
+    sales.inventory_dashboard()
+    
 if __name__=="__main__":
     main()

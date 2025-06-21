@@ -1,78 +1,94 @@
-import random
-import os
-import json
+import random     # For barcode digit generation
+import os         # To check if file exists
+import json       # For reading/writing JSON data
 
 def main():
+    # Run both registration and search
     register_product_or_service()
     search_product_or_service()
-    
+
 def register_product_or_service():
-    name=input("Product or Service Name: ")
-    price=int(input("Product or Service Proce: ")
-    
-    existing_products=load_from_json()
-    
-    #Check if the product name already exits
-    if any(product(["name"].lower() == name for product in existing_products):
-        print("This product or service is already registered on the system.")
-        break
-    
-    barcode=generated_barcode()
-    product={
-        "name":name,
-        "price":price,
-        "barcode":barcode,
-        }
-    # Add the new product to the list of existing ones
+    # Ask user to enter product/service details
+    name = input("Product or Service Name: ").strip().lower()
+
+    try:
+        price = float(input("Product or Service Price (e.g. 19.99): "))
+    except ValueError:
+        print("❌ Invalid price. Please enter a number.")
+        return
+
+    existing_products = load_from_json()
+
+    # Check if the product name already exists
+    if any(product["name"].lower() == name for product in existing_products):
+        print("❌ This product or service is already registered on the system.")
+        return
+
+    # Generate a unique barcode
+    barcode = generate_barcode()
+
+    # Create the product dictionary
+    product = {
+        "name": name,
+        "price": price,
+        "barcode": barcode,
+    }
+
+    # Add the product and save to file
     existing_products.append(product)
-    # Save the updated list back to the JSON file
     save_to_json(existing_products)
-    # Notify the user that registration was successful
+
+    # Confirmation
     print(f"✅ Registered successfully! Barcode: {barcode}")
-    
-    
+
 def generate_barcode():
+    # Keep generating until we get a unique barcode
     while True:
-        # Generate a list of 12 random digits for the EAN-13 base
+        # Generate 12 random digits
         base_digits = [random.randint(0, 9) for _ in range(12)]
-        # Calculate the EAN-13 check digit using the weighted sum formula
+
+        # Calculate EAN-13 check digit
         checksum = sum(
-            base_digits[i] if i % 2 == 0 else base_digits[i] * 3 for i in range(12)
+            base_digits[i] if i % 2 == 0 else base_digits[i] * 3
+            for i in range(12)
         )
-        # Get the check digit that makes the total divisible by 10
         check_digit = (10 - (checksum % 10)) % 10
-        # Combine the 12 base digits and the check digit into one full barcode
+
+        # Create full 13-digit barcode
         full_barcode = ''.join(map(str, base_digits)) + str(check_digit)
-        # Load existing barcodes to ensure uniqueness
+
+        # Ensure it's unique
         existing = load_from_json()
-        
-        # If the generated barcode doesn't already exist, return it
         if not any(p["barcode"] == full_barcode for p in existing):
             return full_barcode
 
 def load_from_json():
-    filename="products.json"
-    #check if the file alreayd exists 
-    if os.path.exists(filenams):
-        with open(filename,"r") as file:
-            try: #Try to load and return the json data
+    filename = "products.json"
+
+    # If file exists, load and return data
+    if os.path.exists(filename):
+        with open(filename, "r") as file:
+            try:
                 return json.load(file)
             except json.JSONDecodeError:
-                #If the file is empty or invalid return empty list
                 return []
-    #If file doesn't exit, return empty list
+
+    # If file doesn't exist, return empty list
     return []
 
 def save_to_json(data):
-    #Save the given product list into products.json with indentation for readability 
-    with open("products.json","w")as file:
-    json.dump(data,file,indent=4)
-      
+    # Save product list to products.json with nice formatting
+    with open("products.json", "w") as file:
+        json.dump(data, file, indent=4)
+
 def search_product_or_service():
+    # Ask for search term
     name = input("Enter the product or service name to search: ").strip().lower()
-    # Load all registered products
+    
+    # Load data
     products = load_from_json()
-    # Try to find the product with a case-insensitive match
+
+    # Search for product by name (case-insensitive)
     for product in products:
         if product["name"].lower() == name:
             print("\n🔍 Product or Service Found:")
@@ -81,9 +97,9 @@ def search_product_or_service():
             print(f"🔢 Barcode: {product['barcode']}")
             return
 
-    # If not found, display message
+    # If not found
     print("❌ Product or service not found in the system.")
-   
-            
-if __name__=="__main__":
+
+# Entry point of the program
+if __name__ == "__main__":
     main()

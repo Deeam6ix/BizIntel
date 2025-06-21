@@ -1,12 +1,10 @@
 import json
 import os
 import re
-import products and services
+import products_and_services
 
 def main():
     record_sale()
-    save_sale_to_file(sale)
-    
     
 def record_sale():
     record_sale.man()

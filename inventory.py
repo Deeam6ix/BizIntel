@@ -1,4 +1,7 @@
 import re
+import json
+import os
+import record_sale
 import products_and_services
 
 def main():
@@ -27,26 +30,9 @@ def sales_region():
     ...
     
 def record_sale():
-    try:
-        customer_name=input("Customer name: ")
-        customer_surname=input("Customer surname: ")
-        while True:
-            customer_phone_number=input("Customer phone number: ")
-            if re.fullmatch(r'\+27[6-8]\d{8},customer_phone_number)):
-                break
-            else:
-                print("Invalid phone number, try starting with (+27...)")
-        while True:
-            customer_postal_code=input("Customer Postal Code: ")
-            if re.fullmatch(r'[1-9]\d{3}', customer_postal_code)):
-                break
-            else:
-                print("Invalid postal code, please try again")
-        #Product or service will be assigned price and barcode number
-        while True:
-            products_and_services.search_product_or_service()
-    except:
-        ...
+    record_sale.main()
+
+
         
 if __name__=="__main__":
     main()

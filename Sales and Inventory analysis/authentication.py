@@ -55,6 +55,7 @@ def user_choice_one():
                     if user["username"] == username and user["password"] == password:
                         print(f"✅ Welcome back, {user['name']} {user['surname']}!")
                         return True
+                    break   
             except json.JSONDecodeError:
                 pass  # If JSON is empty or corrupt, skip to next check
 

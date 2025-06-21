@@ -2,6 +2,7 @@ import re          # For future use: can be used for validating inputs like stro
 import os          # Used to check if files exist (e.g., JSON or CSV)
 import json        # Used to read/write structured data to/from JSON files
 import csv         # Used to read/write user info in CSV (spreadsheet-like) format
+import sales
 
 # Entry point of the program
 def main():
@@ -18,12 +19,12 @@ def user_info():
 
         # Placeholder for sign-in (not yet implemented)
         if user_choice == "1":
-            print("Sign-in feature coming soon...")
-            pass
+            user_choice_one()
 
         # If user chooses to create an account
         elif user_choice == "2":
             user_choice_two()
+            user_choice_one()
 
         # If user chooses to exit the program
         elif user_choice == "3":
@@ -35,7 +36,10 @@ def user_info():
             print("Invalid choice. Please enter 1, 2, or 3.")
 
 def user_choice_one():
-    ...
+    sales.welcome_message
+    user_name=input("\n\nPlease insert your username: ")
+    password=input("Please insert your password: ")
+
     
 # Function to collect user information for account creation
 def user_choice_two():

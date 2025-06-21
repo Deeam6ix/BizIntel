@@ -3,6 +3,7 @@ import os          # Used to check if files exist (e.g., JSON or CSV)
 import json        # Used to read/write structured data to/from JSON files
 import csv         # Used to read/write user info in CSV (spreadsheet-like) format
 import sales
+import sys
 
 # Entry point of the program
 def main():
@@ -54,10 +55,13 @@ def user_choice_one():
                     # If both username and password match, grant access
                     if user["username"] == username and user["password"] == password:
                         print(f"✅ Welcome back, {user['name']} {user['surname']}!")
-                        return True
-                    break   
+                        sales.welcome_message()
+                        return False
+                    break  
+                    sys.exit 
             except json.JSONDecodeError:
                 pass  # If JSON is empty or corrupt, skip to next check
+    
 
     # If no match found in either file
     print("❌ No matching user found. Please create an account.")

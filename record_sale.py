@@ -1,13 +1,13 @@
 import json
 import os
 import re
-import products_and_services
+import products_and_services  
 
 def main():
+    # Call record_sale, which handles everything internally
     record_sale()
-    
+
 def record_sale():
-    record_sale.man()
     try:
         print("\n=== 🧾 New Sale Record ===")
         # Step 1: Get customer details
@@ -27,14 +27,12 @@ def record_sale():
                 break
             else:
                 print("❌ Invalid postal code. Must be 4 digits and not start with 0.")
-
         # Step 4: Search for product/service to sell
         print("\n🔍 Now searching for a product or service to sell: ")
         product = products_and_services.search_product_or_service(return_result=True)
         if not product:
             print("❌ No product selected. Sale cancelled.")
             return
-
         # Step 5: Prepare sale record
         sale_record = {
             "customer_name": f"{customer_name} {customer_surname}",
@@ -42,9 +40,9 @@ def record_sale():
             "postal_code": customer_postal_code,
             "product": product
         }
-        # Step 6: Log to sales.json
+        # Step 6: Save to JSON file
         save_sale_to_file(sale_record)
-        # Step 7: Print receipt
+        # Step 7: Print a receipt
         print("\n🧾 === RECEIPT ===")
         print(f"👤 Customer: {sale_record['customer_name']}")
         print(f"📞 Phone   : {sale_record['phone']}")
@@ -66,7 +64,7 @@ def record_sale():
 
 def save_sale_to_file(sale):
     filename = "sales.json"
-    # Load existing sales
+    # Load existing sales if available
     if os.path.exists(filename):
         with open(filename, "r") as f:
             try:
@@ -77,9 +75,10 @@ def save_sale_to_file(sale):
         sales = []
     # Append the new sale
     sales.append(sale)
-    # Save back to file
+    # Save updated list back to file
     with open(filename, "w") as f:
         json.dump(sales, f, indent=4)
-        
-if __name__=="__main__":
+
+# Run the app
+if __name__ == "__main__":
     main()
